@@ -2,8 +2,12 @@ import React from 'react';
 
 import styles from './UpcomingDaysForecastItem.module.css';
 
-const UpcomingDaysForecastItem = () => (
-    <li className={`${styles.weekday} d-flex flex-column justify-content-center align-items-center p-2`}></li>
+const imgUrlBase = 'https://www.metaweather.com/static/';
+
+const UpcomingDaysForecastItem = ({ weekday, temperature, imgUrl }) => (
+    <li className={`${styles.weekday} d-flex flex-column justify-content-center align-items-center p-2`}>
+        <img className="mb-2" width="30" src={`${imgUrlBase}img/weather/${imgUrl}.svg`} alt="" />
+    </li>
 );
 
 export default UpcomingDaysForecastItem;

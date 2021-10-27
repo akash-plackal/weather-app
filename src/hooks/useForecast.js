@@ -38,9 +38,14 @@ const useForecast = () => {
         return data;
     };
 
-    // const gatherForcastData = data => {
-    //     getCurrentDayForcast()
-    // };
+    const gatherForcastData = data => {
+        const currentDay = getCurrentDayForcast(data.consolidated_weather[0], data.title);
+        const currentDayDetails = getCurrentDayDetailedForcast(data.consolidated_weather[0]);
+        const upcomingDays = getUpcomingDaysForecast(data.consolidated_weather);
+
+        setForecast({ currentDay, currentDayDetails, upcomingDays });
+        setLoading(false);
+    };
 
     const submitRequest = async ({ location }) => {
         setLoading(true);
@@ -50,8 +55,8 @@ const useForecast = () => {
         const data = await getForecastData(res.woeid);
         if (!data) return;
 
-        console.log(data);
-        // gatherForcastData();
+        // console.log(data);
+        gatherForcastData(data);
     };
 
     return {
