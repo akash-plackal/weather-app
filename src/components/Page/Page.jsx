@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 
 import Header from '../Header';
+import Form from '../Form';
 import Error from '../Error';
-import Form from '../Form/Form';
 import Loader from '../Loader';
 import Forecast from '../Forecast';
 
@@ -22,11 +22,15 @@ const Page = () => {
             <Header />
             {!forecast && (
                 <div className={`${styles.box} position-relative`}>
-                    {!isLoading && <Form searchSubmit={onSubmit} />}
+                    {/* Form */}
+                    {!isLoading && <Form submitSearch={onSubmit} />}
+                    {/* Error */}
                     {isError && <Error message={isError} />}
+                    {/* Loader */}
                     {isLoading && <Loader />}
                 </div>
             )}
+            {/* Forecast */}
             {forecast && <Forecast forecast={forecast} />}
         </Fragment>
     );

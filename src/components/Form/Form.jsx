@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 
 import styles from './Form.module.css';
 
-const Form = ({ searchSubmit }) => {
+const Form = ({ submitSearch }) => {
     const [location, setLocation] = useState('');
-    const submitHandler = e => {
+
+    const onSubmit = e => {
         e.preventDefault();
         if (!location || location === '') return;
-        searchSubmit({ location });
+        submitSearch(location);
     };
 
     return (
-        <form onSubmit={submitHandler}>
+        <form onSubmit={onSubmit}>
             <input
                 aria-label="location"
                 type="text"
@@ -22,15 +23,16 @@ const Form = ({ searchSubmit }) => {
                 value={location}
                 onChange={e => setLocation(e.target.value)}
             />
-            <button type="submit" className={styles.button}>
+
+            <button type="submit" className={styles.button} onClick={onSubmit}>
                 SEARCH
             </button>
         </form>
     );
 };
 
-Form.prototype = {
-    submitHandler: PropTypes.func.isRequired,
+Form.propTypes = {
+    submitSearch: PropTypes.func.isRequired,
 };
 
 export default Form;
